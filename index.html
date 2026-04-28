@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nassim Ouaguenouni – Portfolio BTS SIO SISR</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0f4ff;
+    --bg2: #e6ecfa;
+    --card-bg: #ffffff;
+    --accent: #1a56db;
+    --accent2: #7c3aed;
+    --green: #059669;
+    --text: #0f172a;
+    --muted: #475569;
+    --border: rgba(26,86,219,0.14);
+    --shadow: 0 2px 16px rgba(26,86,219,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* GRID BG */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(26,86,219,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26,86,219,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(240,244,255,0.92);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2.5rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+  }
+  .nav-logo span { color: var(--muted); }
+
+  nav ul { display: flex; gap: 2rem; list-style: none; }
+
+  nav a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    position: relative;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 2px;
+    background: var(--accent);
+    transition: width 0.2s;
+    border-radius: 2px;
+  }
+  nav a:hover { color: var(--accent); }
+  nav a:hover::after { width: 100%; }
+
+  /* SECTIONS */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 100px 2.5rem 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 100px;
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(26,86,219,0.08);
+    border: 1px solid rgba(26,86,219,0.22);
+    border-radius: 30px;
+    padding: 6px 18px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    margin-bottom: 2rem;
+    width: fit-content;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    flex-shrink: 0;
+    animation: blink 2s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%,100% { opacity:1; transform:scale(1); }
+    50% { opacity:0.3; transform:scale(0.6); }
+  }
+
+  .hero-name {
+    font-size: clamp(3.2rem, 8vw, 6.5rem);
+    font-weight: 800;
+    line-height: 1.0;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+
+  .hero-name .outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(26,86,219,0.3);
+  }
+
+  .hero-subtitle {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-desc {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 3.5rem;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    padding: 13px 30px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 13px;
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    transition: all 0.2s;
+    box-shadow: 0 4px 14px rgba(26,86,219,0.25);
+  }
+  .btn-primary:hover { background: #1447b8; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(26,86,219,0.35); }
+
+  .btn-outline {
+    border: 1.5px solid var(--border);
+    color: var(--text);
+    background: white;
+    padding: 13px 30px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .stat-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+
+  /* SECTION HEADER */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  .section-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    opacity: 0.55;
+  }
+  .section-line { flex: 1; height: 1px; background: var(--border); max-width: 50px; }
+  .section-title { font-size: 2rem; font-weight: 800; letter-spacing: -0.01em; }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    font-size: 0.97rem;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .skill-tag {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    font-family: 'Space Mono', monospace;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    box-shadow: var(--shadow);
+  }
+  .skill-tag::before { content: '>'; color: var(--accent); font-size: 10px; }
+  .skill-tag:hover { border-color: var(--accent); color: var(--accent); transform: translateX(3px); }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 10px; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent) 60%, transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 1.5rem;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: all 0.2s;
+  }
+  .timeline-item:hover { border-color: rgba(26,86,219,0.3); transform: translateX(4px); }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -34px; top: 18px;
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px rgba(26,86,219,0.15);
+  }
+
+  .timeline-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    margin-bottom: 6px;
+    letter-spacing: 0.06em;
+  }
+  .timeline-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+  .timeline-sub { font-size: 13px; color: var(--muted); }
+
+  .badge {
+    display: inline-block;
+    background: rgba(26,86,219,0.08);
+    border: 1px solid rgba(26,86,219,0.2);
+    border-radius: 30px;
+    padding: 3px 12px;
+    font-size: 11px;
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    margin-top: 10px;
+  }
+
+  .badge.purple {
+    background: rgba(124,58,237,0.08);
+    border-color: rgba(124,58,237,0.22);
+    color: var(--accent2);
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .project-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.8rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.25s;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .project-card:hover { border-color: rgba(26,86,219,0.28); transform: translateY(-4px); box-shadow: 0 8px 30px rgba(26,86,219,0.12); }
+  .project-card:hover::before { opacity: 1; }
+
+  .project-icon {
+    width: 44px; height: 44px;
+    background: rgba(26,86,219,0.07);
+    border: 1px solid rgba(26,86,219,0.15);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 1.2rem;
+  }
+  .project-cat {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .project-title { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+  .project-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+  /* CERTIFICATIONS */
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .cert-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: all 0.2s;
+  }
+  .cert-card:hover { border-color: var(--accent2); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(124,58,237,0.1); }
+  .cert-icon { font-size: 2.2rem; margin-bottom: 0.8rem; display: block; }
+  .cert-name { font-weight: 700; font-size: 0.9rem; margin-bottom: 5px; }
+  .cert-org { font-size: 12px; color: var(--muted); font-family: 'Space Mono', monospace; }
+
+  /* VEILLES */
+  .veilles-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+
+  .veille-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    border-left: 3px solid var(--accent2);
+    box-shadow: var(--shadow);
+    transition: all 0.2s;
+  }
+  .veille-card:hover { transform: translateX(4px); border-left-color: var(--accent); }
+
+  .veille-title { font-weight: 700; margin-bottom: 8px; font-size: 0.97rem; }
+  .veille-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+  .veille-tag {
+    display: inline-block;
+    margin-top: 10px;
+    background: rgba(124,58,237,0.07);
+    border: 1px solid rgba(124,58,237,0.2);
+    border-radius: 4px;
+    padding: 3px 10px;
+    font-size: 11px;
+    font-family: 'Space Mono', monospace;
+    color: var(--accent2);
+  }
+
+  /* CONTACT */
+  .contact-wrapper {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 3.5rem;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(26,86,219,0.05), transparent 55%);
+    pointer-events: none;
+  }
+
+  .contact-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 0.8rem; }
+  .contact-title span { color: var(--accent); }
+  .contact-sub { color: var(--muted); margin-bottom: 2rem; font-size: 0.97rem; }
+
+  .contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    color: var(--text);
+    background: var(--bg);
+    padding: 10px 18px;
+    border-radius: 30px;
+    border: 1px solid var(--border);
+  }
+  .contact-item .icon { color: var(--accent); }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    border-top: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* FADE IN */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg2); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+  @media (max-width: 768px) {
+    nav ul { display: none; }
+    nav { padding: 0 1.2rem; }
+    .about-grid, .veilles-grid { grid-template-columns: 1fr; }
+    #hero, section { padding-left: 1.2rem; padding-right: 1.2rem; }
+    .hero-name { font-size: 3rem; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    .contact-wrapper { padding: 2rem 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">NO<span>_</span>portfolio</div>
+  <ul>
+    <li><a href="#apropos">À propos</a></li>
+    <li><a href="#parcours">Parcours</a></li>
+    <li><a href="#projets">Projets</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#veilles">Veilles</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero" style="padding-top:0;">
+  <div class="hero-tag">BTS SIO – SISR · Disponible en stage / alternance</div>
+  <h1 class="hero-name">
+    <div>Nassim</div>
+    <div class="outline">Ouaguenouni</div>
+  </h1>
+  <p class="hero-subtitle">// Réseaux · Cybersécurité · Infrastructure</p>
+  <p class="hero-desc">
+    Étudiant en 2ᵉ année de BTS SIO spécialité SISR au Lycée Gustave Flaubert de Rouen. Passionné par la sécurisation des systèmes et l'administration d'infrastructures réseau.
+  </p>
+  <div class="hero-btns">
+    <a href="#projets" class="btn-primary">Voir mes projets</a>
+    <a href="#contact" class="btn-outline">Me contacter</a>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">2+</div>
+      <div class="stat-label">Ans de formation</div>
+    </div>
+    <div>
+      <div class="stat-num">E5/E6</div>
+      <div class="stat-label">Épreuves BTS</div>
+    </div>
+    <div>
+      <div class="stat-num">SISR</div>
+      <div class="stat-label">Spécialité réseau</div>
+    </div>
+  </div>
+</section>
+
+<!-- À PROPOS -->
+<section id="apropos">
+  <div class="section-header fade-in">
+    <span class="section-num">01</span>
+    <div class="section-line"></div>
+    <h2 class="section-title">À propos</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text fade-in">
+      <p>Je suis actuellement en deuxième année de BTS SIO, spécialité SISR (Solutions d'Infrastructure, Systèmes et Réseaux). L'informatique me passionne, en particulier les réseaux et la cybersécurité.</p>
+      <p>J'aime comprendre comment fonctionnent les infrastructures informatiques et je me spécialise dans la sécurisation des systèmes pour protéger les données contre les menaces externes.</p>
+      <p>Motivé par les défis techniques, je suis constamment en quête de nouvelles connaissances pour rester à jour face aux menaces et aux meilleures pratiques de sécurité.</p>
+    </div>
+    <div class="skills-grid fade-in">
+      <div class="skill-tag">Admin Linux</div>
+      <div class="skill-tag">Windows Server</div>
+      <div class="skill-tag">Cisco / Réseaux</div>
+      <div class="skill-tag">Virtualisation</div>
+      <div class="skill-tag">Cybersécurité</div>
+      <div class="skill-tag">Active Directory</div>
+      <div class="skill-tag">Cloud / Azure</div>
+      <div class="skill-tag">Supervision</div>
+      <div class="skill-tag">Bash / PowerShell</div>
+      <div class="skill-tag">VPN / Pare-feu</div>
+    </div>
+  </div>
+</section>
+
+<!-- PARCOURS -->
+<section id="parcours">
+  <div class="section-header fade-in">
+    <span class="section-num">02</span>
+    <div class="section-line"></div>
+    <h2 class="section-title">Parcours</h2>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item fade-in">
+      <div class="timeline-date">2021 – 2022</div>
+      <div class="timeline-title">Baccalauréat STI2D</div>
+      <div class="timeline-sub">Lycée Georges Dumézil · Vernon</div>
+      <span class="badge">Mention Assez Bien</span>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-date">2023 – aujourd'hui</div>
+      <div class="timeline-title">BTS SIO – Spécialité SISR</div>
+      <div class="timeline-sub">Lycée Gustave Flaubert · Rouen</div>
+      <span class="badge">En cours</span>
+    </div>
+    <div class="timeline-item fade-in" style="border-left: 3px solid var(--accent2);">
+      <div class="timeline-date" style="color:var(--accent2);">Projet professionnel</div>
+      <div class="timeline-title">Licence 3 Informatique · Cybersécurité</div>
+      <div class="timeline-sub">Poursuite d'études envisagée après le BTS</div>
+      <span class="badge purple">Objectif futur</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETS -->
+<section id="projets">
+  <div class="section-header fade-in">
+    <span class="section-num">03</span>
+    <div class="section-line"></div>
+    <h2 class="section-title">Projets &amp; Épreuves</h2>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card fade-in">
+      <div class="project-icon">🛡️</div>
+      <div class="project-cat">Épreuve E5</div>
+      <div class="project-title">Administration &amp; Sécurité Réseau</div>
+      <p class="project-desc">Mise en place et sécurisation d'infrastructures réseau en entreprise. Configuration de pare-feux, VPN et politiques de sécurité.</p>
+    </div>
+    <div class="project-card fade-in">
+      <div class="project-icon">🖥️</div>
+      <div class="project-cat">Épreuve E5</div>
+      <div class="project-title">Administration Systèmes</div>
+      <p class="project-desc">Déploiement de serveurs Windows et Linux, virtualisation VMware et Hyper-V, gestion Active Directory et GPO.</p>
+    </div>
+    <div class="project-card fade-in">
+      <div class="project-icon">☁️</div>
+      <div class="project-cat">Épreuve E6</div>
+      <div class="project-title">Solutions Cloud &amp; Supervision</div>
+      <p class="project-desc">Intégration de services cloud et mise en place d'outils de supervision pour monitorer l'infrastructure et anticiper les incidents.</p>
+    </div>
+    <div class="project-card fade-in">
+      <div class="project-icon">🔍</div>
+      <div class="project-cat">Épreuve E6</div>
+      <div class="project-title">Audit &amp; Conformité SI</div>
+      <p class="project-desc">Analyse de la sécurité du système d'information, identification des vulnérabilités et mise en conformité selon les bonnes pratiques.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-header fade-in">
+    <span class="section-num">04</span>
+    <div class="section-line"></div>
+    <h2 class="section-title">Certifications</h2>
+  </div>
+  <div class="certs-grid">
+    <div class="cert-card fade-in">
+      <span class="cert-icon">🌐</span>
+      <div class="cert-name">CCNA / Réseaux Cisco</div>
+      <div class="cert-org">Cisco Networking Academy</div>
+    </div>
+    <div class="cert-card fade-in">
+      <span class="cert-icon">🔐</span>
+      <div class="cert-name">Cybersécurité</div>
+      <div class="cert-org">Formation spécialisée</div>
+    </div>
+    <div class="cert-card fade-in">
+      <span class="cert-icon">🪟</span>
+      <div class="cert-name">Windows Server</div>
+      <div class="cert-org">Microsoft</div>
+    </div>
+    <div class="cert-card fade-in">
+      <span class="cert-icon">🐧</span>
+      <div class="cert-name">Linux Essentials</div>
+      <div class="cert-org">Linux Professional Institute</div>
+    </div>
+  </div>
+  <p style="color:var(--muted);font-size:12px;margin-top:1.2rem;font-family:'Space Mono',monospace;">// À compléter avec tes vraies certifications</p>
+</section>
+
+<!-- VEILLES -->
+<section id="veilles">
+  <div class="section-header fade-in">
+    <span class="section-num">05</span>
+    <div class="section-line"></div>
+    <h2 class="section-title">Veilles Technologiques</h2>
+  </div>
+  <div class="veilles-grid">
+    <div class="veille-card fade-in">
+      <div class="veille-title">Cybersécurité &amp; menaces émergentes</div>
+      <p class="veille-desc">Suivi des nouvelles vulnérabilités, ransomwares et techniques d'attaque pour mieux anticiper et défendre les systèmes d'information.</p>
+      <span class="veille-tag">Sécurité offensive/défensive</span>
+    </div>
+    <div class="veille-card fade-in">
+      <div class="veille-title">Évolutions du cloud computing</div>
+      <p class="veille-desc">Veille sur les services AWS, Azure et GCP, les nouvelles architectures cloud-native et les enjeux de sécurité associés.</p>
+      <span class="veille-tag">Cloud &amp; DevOps</span>
+    </div>
+    <div class="veille-card fade-in">
+      <div class="veille-title">IA appliquée à la cybersécurité</div>
+      <p class="veille-desc">Comment l'IA est utilisée pour détecter les intrusions, automatiser la réponse aux incidents et améliorer la posture sécuritaire.</p>
+      <span class="veille-tag">IA &amp; Machine Learning</span>
+    </div>
+    <div class="veille-card fade-in">
+      <div class="veille-title">RGPD, NIS2 &amp; conformité</div>
+      <p class="veille-desc">Suivi des évolutions réglementaires européennes en matière de protection des données et de cybersécurité des opérateurs vitaux.</p>
+      <span class="veille-tag">Droit &amp; Conformité</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header fade-in">
+    <span class="section-num">06</span>
+    <div class="section-line"></div>
+    <h2 class="section-title">Contact</h2>
+  </div>
+  <div class="contact-wrapper fade-in">
+    <h3 class="contact-title">Travaillons <span>ensemble</span></h3>
+    <p class="contact-sub">Disponible pour un stage ou une alternance dans le domaine réseaux / cybersécurité.</p>
+    <div class="contact-info">
+      <div class="contact-item"><span class="icon">✉</span> nassimoug2@gmail.com</div>
+      <div class="contact-item"><span class="icon">📍</span> Rouen · Normandie</div>
+      <div class="contact-item"><span class="icon">🎓</span> BTS SIO SISR – 2ᵉ année</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Nassim Ouaguenouni · BTS SIO SISR · Lycée Gustave Flaubert, Rouen</p>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>
