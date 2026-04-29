@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nassim Ouaguenouni – Portfolio BTS SIO SISR</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0f4ff;
+    --bg2: #e6ecfa;
+    --accent: #1a56db;
+    --accent2: #7c3aed;
+    --green: #059669;
+    --text: #0f172a;
+    --muted: #475569;
+    --border: rgba(26,86,219,0.14);
+    --shadow: 0 2px 16px rgba(26,86,219,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(26,86,219,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26,86,219,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(240,244,255,0.92);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2.5rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-logo { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--accent); letter-spacing: 0.06em; }
+  .nav-logo span { color: var(--muted); }
+  nav ul { display: flex; gap: 2rem; list-style: none; }
+  nav a { color: var(--muted); text-decoration: none; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; position: relative; }
+  nav a::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: var(--accent); transition: width 0.2s; border-radius: 2px; }
+  nav a:hover { color: var(--accent); }
+  nav a:hover::after { width: 100%; }
+
+  section { position: relative; z-index: 1; padding: 100px 2.5rem 60px; max-width: 1100px; margin: 0 auto; }
+
+  #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 100px; max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+
+  .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(26,86,219,0.08); border: 1px solid rgba(26,86,219,0.22); border-radius: 30px; padding: 6px 18px; font-family: 'Space Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 0.08em; margin-bottom: 2rem; width: fit-content; }
+  .hero-tag::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green); flex-shrink: 0; animation: blink 2s ease-in-out infinite; }
+
+  @keyframes blink { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.3; transform:scale(0.6); } }
+
+  .hero-name { font-size: clamp(3.2rem, 8vw, 6.5rem); font-weight: 800; line-height: 1.0; margin-bottom: 1rem; letter-spacing: -0.02em; }
+  .hero-name .outline { color: transparent; -webkit-text-stroke: 1.5px rgba(26,86,219,0.3); }
+  .hero-subtitle { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 1.5rem; }
+  .hero-desc { font-size: 1.05rem; color: var(--muted); max-width: 520px; line-height: 1.75; margin-bottom: 2.5rem; }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3.5rem; }
+
+  .btn-primary { background: var(--accent); color: #fff; padding: 13px 30px; border-radius: 6px; font-weight: 700; font-size: 13px; text-decoration: none; letter-spacing: 0.06em; transition: all 0.2s; box-shadow: 0 4px 14px rgba(26,86,219,0.25); }
+  .btn-primary:hover { background: #1447b8; transform: translateY(-2px); }
+  .btn-outline { border: 1.5px solid var(--border); color: var(--text); background: white; padding: 13px 30px; border-radius: 6px; font-weight: 600; font-size: 13px; text-decoration: none; letter-spacing: 0.06em; transition: all 0.2s; }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  .hero-stats { display: flex; gap: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+  .stat-num { font-family: 'Space Mono', monospace; font-size: 1.8rem; font-weight: 700; color: var(--accent); }
+  .stat-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+
+  .section-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 3rem; }
+  .section-num { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--accent); opacity: 0.55; }
+  .section-line { flex: 1; height: 1px; background: var(--border); max-width: 50px; }
+  .section-title { font-size: 2rem; font-weight: 800; letter-spacing: -0.01em; }
+
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+  .about-text p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; font-size: 0.97rem; }
+
+  .cv-preview { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); height: 380px; background: white; cursor: pointer; transition: all 0.25s; }
+  .cv-preview:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(26,86,219,0.15); border-color: rgba(26,86,219,0.3); }
+  .cv-preview iframe { width: 100%; height: 100%; border: none; pointer-events: none; }
+  .cv-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,14,30,0.75) 0%, transparent 50%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1.2rem; opacity: 0; transition: opacity 0.25s; }
+  .cv-preview:hover .cv-overlay { opacity: 1; }
+  .cv-overlay-btn { display: inline-block; background: white; color: var(--accent); font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; padding: 6px 16px; border-radius: 20px; width: fit-content; }
+
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 10px; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--accent) 60%, transparent); }
+  .timeline-item { position: relative; margin-bottom: 1.5rem; background: white; border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; box-shadow: var(--shadow); transition: all 0.2s; }
+  .timeline-item:hover { border-color: rgba(26,86,219,0.3); transform: translateX(4px); }
+  .timeline-item::before { content: ''; position: absolute; left: -34px; top: 18px; width: 11px; height: 11px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px rgba(26,86,219,0.15); }
+  .timeline-date { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--accent); margin-bottom: 6px; letter-spacing: 0.06em; }
+  .timeline-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+  .timeline-sub { font-size: 13px; color: var(--muted); }
+  .badge { display: inline-block; background: rgba(26,86,219,0.08); border: 1px solid rgba(26,86,219,0.2); border-radius: 30px; padding: 3px 12px; font-size: 11px; color: var(--accent); font-family: 'Space Mono', monospace; margin-top: 10px; }
+  .badge.green { background: rgba(5,150,105,0.08); border-color: rgba(5,150,105,0.22); color: var(--green); }
+
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.2rem; }
+  .project-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 1.8rem; position: relative; overflow: hidden; box-shadow: var(--shadow); transition: all 0.25s; }
+  .project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); opacity: 0; transition: opacity 0.25s; }
+  .project-card:hover { border-color: rgba(26,86,219,0.28); transform: translateY(-4px); box-shadow: 0 8px 30px rgba(26,86,219,0.12); }
+  .project-card:hover::before { opacity: 1; }
+  .project-icon { width: 44px; height: 44px; background: rgba(26,86,219,0.07); border: 1px solid rgba(26,86,219,0.15); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 1.2rem; }
+  .project-cat { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; }
+  .project-title { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+  .project-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+  .drive-btn { display: inline-flex; align-items: center; gap: 10px; background: white; border: 1.5px solid var(--border); border-radius: 8px; padding: 14px 28px; font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; color: var(--accent); text-decoration: none; box-shadow: var(--shadow); transition: all 0.2s; }
+  .drive-btn:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,86,219,0.15); }
+
+  .certs-section-label { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; margin-top: 2.5rem; padding-left: 10px; border-left: 3px solid var(--accent); }
+  .certs-section-label:first-of-type { margin-top: 0; }
+  .certs-section-label.lp { border-left-color: var(--accent2); }
+  .certs-section-label.lg { border-left-color: var(--green); }
+
+  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.2rem; margin-bottom: 0.5rem; }
+  .gallery-card { position: relative; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); cursor: pointer; height: 220px; background: white; transition: all 0.25s; }
+  .gallery-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(26,86,219,0.15); border-color: rgba(26,86,219,0.3); }
+  .gallery-card iframe { width: 100%; height: 100%; pointer-events: none; border: none; }
+  .gallery-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,14,30,0.82) 0%, transparent 55%); display: flex; flex-direction: column; justify-content: flex-end; padding: 1rem; opacity: 0; transition: opacity 0.25s; }
+  .gallery-card:hover .gallery-overlay { opacity: 1; }
+  .gallery-info { margin-bottom: 0.6rem; }
+  .gallery-name { color: white; font-weight: 700; font-size: 0.88rem; margin-bottom: 3px; }
+  .gallery-org { color: rgba(255,255,255,0.65); font-size: 11px; font-family: 'Space Mono', monospace; }
+  .gallery-btn { display: inline-block; background: white; color: var(--accent); font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; padding: 5px 14px; border-radius: 20px; width: fit-content; }
+
+  .veille-card { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; border-left: 3px solid var(--accent); box-shadow: var(--shadow); transition: all 0.2s; }
+  .veille-card:hover { transform: translateX(4px); border-left-color: var(--accent2); }
+  .veille-title { font-weight: 700; margin-bottom: 8px; font-size: 0.97rem; }
+  .veille-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+  .veille-tag { display: inline-block; margin-top: 10px; background: rgba(124,58,237,0.07); border: 1px solid rgba(124,58,237,0.2); border-radius: 4px; padding: 3px 10px; font-size: 11px; font-family: 'Space Mono', monospace; color: var(--accent2); }
+  .veille-link { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--accent); text-decoration: none; display: inline-flex; align-items: center; gap: 5px; transition: color 0.2s; }
+  .veille-link::before { content: '→'; font-size: 10px; }
+  .veille-link:hover { color: var(--accent2); text-decoration: underline; }
+
+  .contact-wrapper { background: white; border: 1px solid var(--border); border-radius: 14px; padding: 3.5rem; text-align: center; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+  .contact-wrapper::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(26,86,219,0.05), transparent 55%); pointer-events: none; }
+  .contact-title { font-size: 2.2rem; font-weight: 800; margin-bottom: 0.8rem; }
+  .contact-title span { color: var(--accent); }
+  .contact-sub { color: var(--muted); margin-bottom: 2rem; font-size: 0.97rem; }
+  .contact-info { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+  .contact-item { display: flex; align-items: center; gap: 8px; font-family: 'Space Mono', monospace; font-size: 12px; color: var(--text); background: var(--bg); padding: 10px 18px; border-radius: 30px; border: 1px solid var(--border); }
+  .contact-item .icon { color: var(--accent); }
+
+  footer { text-align: center; padding: 2rem; color: var(--muted); font-family: 'Space Mono', monospace; font-size: 11px; border-top: 1px solid var(--border); position: relative; z-index: 1; }
+
+  .fade-in { opacity: 0; transform: translateY(18px); transition: opacity 0.55s ease, transform 0.55s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg2); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 2px; }
+
+  @media (max-width: 768px) {
+    nav ul { display: none; }
+    nav { padding: 0 1.2rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    #hero, section { padding-left: 1.2rem; padding-right: 1.2rem; }
+    .hero-name { font-size: 3rem; }
+    .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+    .contact-wrapper { padding: 2rem 1.2rem; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">NO<span>_</span>portfolio</div>
+  <ul>
+    <li><a href="#apropos">À propos</a></li>
+    <li><a href="#parcours">Parcours</a></li>
+    <li><a href="#projets">Projets</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#veilles">Veilles</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero" style="padding-top:0;">
+  <div class="hero-tag">BTS SIO – SISR · Disponible en stage / alternance</div>
+  <h1 class="hero-name">
+    <div>Nassim</div>
+    <div class="outline">Ouaguenouni</div>
+  </h1>
+  <p class="hero-subtitle">// Réseaux · Cybersécurité · Infrastructure</p>
+  <p class="hero-desc">Étudiant en 2ᵉ année de BTS SIO spécialité SISR au Lycée Gustave Flaubert de Rouen. Passionné par la sécurisation des systèmes et l'administration d'infrastructures réseau.</p>
+  <div class="hero-btns">
+    <a href="#projets" class="btn-primary">Voir mes projets</a>
+    <a href="#contact" class="btn-outline">Me contacter</a>
+  </div>
+  <div class="hero-stats">
+    <div><div class="stat-num">2+</div><div class="stat-label">Ans de formation</div></div>
+    <div><div class="stat-num">E5/E6</div><div class="stat-label">Épreuves BTS</div></div>
+    <div><div class="stat-num">SISR</div><div class="stat-label">Spécialité réseau</div></div>
+  </div>
+</section>
+
+<!-- À PROPOS -->
+<section id="apropos">
+  <div class="section-header fade-in">
+    <span class="section-num">01</span>
+    <div class="section-line"></div>
+    <h2 class="section-title">À propos</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text fade-in">
+      <p>Je suis actuellement en deuxième année de BTS SIO, spécialité SISR (Solutions d'Infrastructure, Systèmes et Réseaux). L'informatique me passionne, en particulier les réseaux et la cybersécurité.</p>
+      <p>J'aime comprendre comment fonctionnent les infrastructures informatiques et je me spécialise dans la sécurisation des systèmes pour protéger les données contre les menaces externes.</p>
+      <p>Motivé par les défis techniques, je suis constamment en quête de nouvelles connaissances pour rester à jour face aux menaces et aux meilleures pratiques de sécurité.</p>
+    </div>
+    <div class="cv-preview fade-in" onclick="openModal('CvNassim.pdf', 'Curriculum Vitae – Nassim Ouaguenouni')">
+      <iframe src="CvNassim.pdf#toolbar=0&navpanes=0&scrollbar=0" tabindex="-1"></iframe>
+      <div class="cv-overlay">
+        <span class="cv-overlay-btn">Voir le CV complet</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARCOURS -->
+<section id="parcours">
+  <div class="section-header fade-in">
+    <span class="section-num">02</span>
+    <div class="section-line"></div>
+    <h2 class="section-title">Parcours</h2>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item fade-in">
+      <div class="timeline-date">2021 – 2022</div>
+      <div class="timeline-title">Baccalauréat STI2D</div>
+      <div class="timeline-sub">Lycée Georges Dumézil · Vernon</div>
+      <span class="badge">Mention Assez Bien</span>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-date">2023 – aujourd'hui</div>
+      <div class="timeline-title">BTS SIO – Spécialité SISR</div>
+      <div class="timeline-sub">Lycée Gustave Flaubert · Rouen</div>
+      <span class="badge">En cours</span>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-date">Mai – Juin 2024</div>
+      <div class="timeline-title">Technicien Support Informatique</div>
+      <div class="timeline-sub">Valeo · Bobigny</div>
+      <span class="badge green">Stage</span>
+    </div>
+    <div class="timeline-item fade-in">
+      <div class="timeline-date">Janvier – Février 2025</div>
+      <div class="timeline-title">Technicien d'Exploitation</div>
+      <div class="timeline-sub">Altitude Infra · Val-de-Reuil</div>
+      <span class="badge green">Stage</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETS -->
+<section id="projets">
+  <div class="section-header fade-in">
+    <span class="section-num">03</span>
+    <div class="section-line"></div>
+    <h2 class="section-title">Projets &amp; Épreuves</h2>
+  </div>
+  <div class="projects-grid">
+
+    <!-- E5 -->
+    <div class="project-card fade-in">
+      <div class="project-icon">🛡️</div>
+      <div class="project-cat">Épreuve E5</div>
+      <div class="project-title">Conception et maintenance de solutions informatiques</div>
+      <p class="project-desc">Présentation et justification des compétences acquises durant le BTS à travers un dossier de réalisations professionnelles.</p>
+      <div style="margin-top:1rem;display:flex;flex-direction:column;gap:7px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;min-width:80px;">Coefficient</span>
+          <span style="font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:var(--accent);background:rgba(26,86,219,0.08);border:1px solid rgba(26,86,219,0.2);border-radius:20px;padding:2px 10px;">4</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;min-width:80px;">Durée</span>
+          <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">40 minutes</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;min-width:80px;">Nature</span>
+          <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">Orale (avec dossier)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- E6 -->
+    <div class="project-card fade-in">
+      <div class="project-icon">📁</div>
+      <div class="project-cat">Épreuve E6</div>
+      <div class="project-title">Parcours de professionnalisation</div>
+      <p class="project-desc">Mise en situation à partir des réalisations effectuées durant le BTS, présentées sous forme de fiches de situations professionnelles.</p>
+      <div style="margin-top:1rem;display:flex;flex-direction:column;gap:7px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;min-width:80px;">Coefficient</span>
+          <span style="font-family:'Space Mono',monospace;font-size:11px;font-weight:700;color:var(--accent);background:rgba(26,86,219,0.08);border:1px solid rgba(26,86,219,0.2);border-radius:20px;padding:2px 10px;">4</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;min-width:80px;">Durée</span>
+          <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">2 heures 10 minutes</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;min-width:80px;">Nature</span>
+          <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--text);">Pratique</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BOUTON DRIVE -->
+  <div class="fade-in" style="margin-top:2rem;text-align:center;">
+    <a href="https://drive.google.com/drive/folders/1eO4G6ajB6SEFl-T1ddsJdoG1vNNZks09?dmr=1&ec=wgc-drive-%5Bmodule%5D-goto" target="_blank" class="drive-btn">
+      <span style="font-size:18px;">📂</span>
+      Accéder à toute la documentation
+      <span style="opacity:0.5;">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-header fade-in">
+    <span class="section-num">04</span>
+    <div class="section-line"></div>
+    <h2 class="section-title">Certifications</h2>
+  </div>
+
+  <p class="certs-section-label fade-in">ANSSI · SecNumacadémie — Janvier 2025</p>
+  <div class="gallery-grid fade-in">
+    <div class="gallery-card" onclick="openModal('ANSSI.pdf', 'SecNumacadémie – 4 modules')">
+      <iframe src="ANSSI.pdf#toolbar=0&navpanes=0&scrollbar=0" tabindex="-1"></iframe>
+      <div class="gallery-overlay">
+        <div class="gallery-info">
+          <div class="gallery-name">SecNumacadémie – 4 modules</div>
+          <div class="gallery-org">ANSSI · 13/01/2025</div>
+        </div>
+        <span class="gallery-btn">Agrandir</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="certs-section-label lp fade-in">Cisco Networking Academy — Janvier 2025</p>
+  <div class="gallery-grid fade-in">
+    <div class="gallery-card" onclick="openModal('EthicalHackerCisco.pdf', 'Ethical Hacker')">
+      <iframe src="EthicalHackerCisco.pdf#toolbar=0&navpanes=0&scrollbar=0" tabindex="-1"></iframe>
+      <div class="gallery-overlay">
+        <div class="gallery-info">
+          <div class="gallery-name">Ethical Hacker</div>
+          <div class="gallery-org">Cisco · 20/01/2025</div>
+        </div>
+        <span class="gallery-btn">Agrandir</span>
+      </div>
+    </div>
+    <div class="gallery-card" onclick="openModal('introcyber.pdf', 'Introduction à la cybersécurité')">
+      <iframe src="introcyber.pdf#toolbar=0&navpanes=0&scrollbar=0" tabindex="-1"></iframe>
+      <div class="gallery-overlay">
+        <div class="gallery-info">
+          <div class="gallery-name">Introduction à la cybersécurité</div>
+          <div class="gallery-org">Cisco · 22/01/2025</div>
+        </div>
+        <span class="gallery-btn">Agrandir</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="certs-section-label lg fade-in">CNIL · L'Atelier RGPD — Janvier 2025</p>
+  <div class="gallery-grid fade-in">
+    <div class="gallery-card" onclick="openModal('Module1_CNIL.pdf', 'Le RGPD et ses notions clés')">
+      <iframe src="Module1_CNIL.pdf#toolbar=0&navpanes=0&scrollbar=0" tabindex="-1"></iframe>
+      <div class="gallery-overlay">
+        <div class="gallery-info">
+          <div class="gallery-name">Le RGPD et ses notions clés</div>
+          <div class="gallery-org">CNIL · Module 1 · 100%</div>
+        </div>
+        <span class="gallery-btn">Agrandir</span>
+      </div>
+    </div>
+    <div class="gallery-card" onclick="openModal('Module2_CNIL.pdf', 'Protection des données')">
+      <iframe src="Module2_CNIL.pdf#toolbar=0&navpanes=0&scrollbar=0" tabindex="-1"></iframe>
+      <div class="gallery-overlay">
+        <div class="gallery-info">
+          <div class="gallery-name">Les principes de la protection des données</div>
+          <div class="gallery-org">CNIL · Module 2 · 92%</div>
+        </div>
+        <span class="gallery-btn">Agrandir</span>
+      </div>
+    </div>
+    <div class="gallery-card" onclick="openModal('Module3_CNIL.pdf', 'Responsabilités des acteurs')">
+      <iframe src="Module3_CNIL.pdf#toolbar=0&navpanes=0&scrollbar=0" tabindex="-1"></iframe>
+      <div class="gallery-overlay">
+        <div class="gallery-info">
+          <div class="gallery-name">Les responsabilités des acteurs</div>
+          <div class="gallery-org">CNIL · Module 3 · 93%</div>
+        </div>
+        <span class="gallery-btn">Agrandir</span>
+      </div>
+    </div>
+    <div class="gallery-card" onclick="openModal('Module4_CNIL.pdf', 'DPO et conformité')">
+      <iframe src="Module4_CNIL.pdf#toolbar=0&navpanes=0&scrollbar=0" tabindex="-1"></iframe>
+      <div class="gallery-overlay">
+        <div class="gallery-info">
+          <div class="gallery-name">Le DPO et les outils de la conformité</div>
+          <div class="gallery-org">CNIL · Module 4 · 80%</div>
+        </div>
+        <span class="gallery-btn">Agrandir</span>
+      </div>
+    </div>
+    <div class="gallery-card" onclick="openModal('Module5_CNIL.pdf', 'Collectivités territoriales')">
+      <iframe src="Module5_CNIL.pdf#toolbar=0&navpanes=0&scrollbar=0" tabindex="-1"></iframe>
+      <div class="gallery-overlay">
+        <div class="gallery-info">
+          <div class="gallery-name">Les collectivités territoriales</div>
+          <div class="gallery-org">CNIL · Module 5 · 92%</div>
+        </div>
+        <span class="gallery-btn">Agrandir</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL PDF -->
+<div id="pdfModal" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(10,14,30,0.88);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:1.5rem;">
+  <div style="background:white;border-radius:14px;width:100%;max-width:900px;max-height:92vh;display:flex;flex-direction:column;box-shadow:0 32px 80px rgba(0,0,0,0.5);overflow:hidden;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;border-bottom:1px solid var(--border);background:var(--bg);flex-shrink:0;">
+      <div>
+        <div style="font-size:10px;font-family:'Space Mono',monospace;color:var(--accent);margin-bottom:2px;letter-spacing:0.08em;">DOCUMENT</div>
+        <div id="modalTitle" style="font-weight:700;font-size:0.95rem;"></div>
+      </div>
+      <div style="display:flex;gap:0.7rem;align-items:center;">
+        <a id="modalDownload" href="#" download style="font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);border:1px solid rgba(26,86,219,0.3);border-radius:6px;padding:6px 14px;text-decoration:none;">⬇ Télécharger</a>
+        <button onclick="closeModal()" style="background:none;border:none;cursor:pointer;font-size:20px;color:var(--muted);padding:4px 8px;border-radius:6px;">✕</button>
+      </div>
+    </div>
+    <iframe id="modalIframe" src="" style="flex:1;border:none;min-height:540px;"></iframe>
+  </div>
+</div>
+
+<!-- VEILLES -->
+<section id="veilles">
+  <div class="section-header fade-in">
+    <span class="section-num">05</span>
+    <div class="section-line"></div>
+    <h2 class="section-title">Veilles Technologiques</h2>
+  </div>
+
+  <div style="background:white;border:1px solid var(--border);border-radius:12px;padding:1.4rem 1.8rem;margin-bottom:2rem;box-shadow:var(--shadow);" class="fade-in">
+    <span style="font-family:'Space Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:0.08em;text-transform:uppercase;">Thématique · BTS SIO SISR</span>
+    <h3 style="font-size:1.2rem;font-weight:800;margin-top:6px;">Veille Technologique – Intelligence Artificielle (IA)</h3>
+    <p style="color:var(--muted);font-size:0.9rem;margin-top:10px;line-height:1.75;">L'intelligence artificielle est aujourd'hui une technologie centrale dans l'évolution des systèmes informatiques. Elle impacte directement les réseaux, la cybersécurité, les logiciels et les usages en entreprise. Cette veille présente 6 thématiques majeures de l'IA avec des sources récentes (moins de 6 mois via actualités et flux Google News).</p>
+  </div>
+
+  <!-- VEILLE 1 -->
+  <div class="veille-card fade-in" style="margin-bottom:1.2rem;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+      <span style="font-family:'Space Mono',monospace;font-size:10px;color:white;background:var(--accent);padding:3px 10px;border-radius:20px;flex-shrink:0;">01</span>
+      <div class="veille-title" style="margin:0;">L'IA générative : évolution rapide des modèles</div>
+    </div>
+    <p class="veille-desc">L'IA générative permet de créer automatiquement du contenu (texte, images, code). Elle repose sur des modèles d'apprentissage profond de plus en plus performants. En 2026, les modèles comme GPT et Gemini évoluent vers plus de précision, de raisonnement et d'intégration dans les outils professionnels.</p>
+    <p class="veille-desc" style="margin-top:8px;">Ces systèmes sont utilisés pour : automatiser le développement logiciel, assister les techniciens systèmes et réseaux, générer de la documentation technique. On observe une forte intégration dans les environnements professionnels IT.</p>
+    <div style="margin-top:14px;display:flex;flex-direction:column;gap:6px;">
+      <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:2px;">Sources</span>
+      <a href="https://openai.com/index/gpt-4o" target="_blank" class="veille-link">openai.com/index/gpt-4o</a>
+      <a href="https://blog.google/technology/ai/" target="_blank" class="veille-link">blog.google/technology/ai</a>
+      <a href="https://news.google.com/search?q=intelligence+artificielle+g%C3%A9n%C3%A9rative+2026" target="_blank" class="veille-link">Google News – IA générative 2026</a>
+    </div>
+    <span class="veille-tag">IA Générative</span>
+  </div>
+
+  <!-- VEILLE 2 -->
+  <div class="veille-card fade-in" style="margin-bottom:1.2rem;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+      <span style="font-family:'Space Mono',monospace;font-size:10px;color:white;background:var(--accent);padding:3px 10px;border-radius:20px;flex-shrink:0;">02</span>
+      <div class="veille-title" style="margin:0;">Open source et démocratisation de l'IA</div>
+    </div>
+    <p class="veille-desc">L'open source devient un élément majeur dans l'évolution de l'intelligence artificielle. Il permet aux entreprises et développeurs d'utiliser des modèles sans dépendance totale aux services cloud.</p>
+    <p class="veille-desc" style="margin-top:8px;">Des projets comme Mistral AI ou LLaMA permettent l'exécution locale de modèles puissants, ce qui améliore la confidentialité et réduit les coûts. Cela est particulièrement utile dans les infrastructures SISR pour garder le contrôle des données internes.</p>
+    <div style="margin-top:14px;display:flex;flex-direction:column;gap:6px;">
+      <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:2px;">Sources</span>
+      <a href="https://mistral.ai/news" target="_blank" class="veille-link">mistral.ai/news</a>
+      <a href="https://ai.meta.com/blog/" target="_blank" class="veille-link">ai.meta.com/blog</a>
+      <a href="https://news.google.com/search?q=mistral+ai+llama+2026" target="_blank" class="veille-link">Google News – Mistral AI / LLaMA 2026</a>
+    </div>
+    <span class="veille-tag">Open Source</span>
+  </div>
+
+  <!-- VEILLE 3 -->
+  <div class="veille-card fade-in" style="margin-bottom:1.2rem;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+      <span style="font-family:'Space Mono',monospace;font-size:10px;color:white;background:var(--accent);padding:3px 10px;border-radius:20px;flex-shrink:0;">03</span>
+      <div class="veille-title" style="margin:0;">IA et cybersécurité : protection et menaces</div>
+    </div>
+    <p class="veille-desc">L'IA joue un rôle clé dans la cybersécurité moderne. Elle permet de détecter des anomalies réseau, analyser des logs et identifier des attaques en temps réel.</p>
+    <p class="veille-desc" style="margin-top:8px;">Les usages principaux incluent : détection de ransomware, analyse comportementale des utilisateurs, réponse automatique aux incidents. Cependant, les attaquants utilisent aussi l'IA pour créer des attaques plus sophistiquées (phishing avancé, deepfakes).</p>
+    <div style="margin-top:14px;display:flex;flex-direction:column;gap:6px;">
+      <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:2px;">Sources</span>
+      <a href="https://www.ssi.gouv.fr/actualites/" target="_blank" class="veille-link">ssi.gouv.fr – Actualités ANSSI</a>
+      <a href="https://news.google.com/search?q=cybers%C3%A9curit%C3%A9+IA+2026" target="_blank" class="veille-link">Google News – Cybersécurité IA 2026</a>
+      <a href="https://www.economie.gouv.fr" target="_blank" class="veille-link">economie.gouv.fr</a>
+    </div>
+    <span class="veille-tag">Cybersécurité</span>
+  </div>
+
+  <!-- VEILLE 4 -->
+  <div class="veille-card fade-in" style="margin-bottom:1.2rem;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+      <span style="font-family:'Space Mono',monospace;font-size:10px;color:white;background:var(--accent);padding:3px 10px;border-radius:20px;flex-shrink:0;">04</span>
+      <div class="veille-title" style="margin:0;">IA et moteurs de recherche</div>
+    </div>
+    <p class="veille-desc">Les moteurs de recherche évoluent avec l'intégration de l'IA générative. Google propose désormais des résumés automatiques directement dans les résultats de recherche.</p>
+    <p class="veille-desc" style="margin-top:8px;">Cela change profondément les usages : moins de clics vers les sites, réponses instantanées générées par IA, synthèse de plusieurs sources. Cela pose des enjeux sur la fiabilité et la visibilité des sites web.</p>
+    <div style="margin-top:14px;display:flex;flex-direction:column;gap:6px;">
+      <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:2px;">Sources</span>
+      <a href="https://blog.google/products/search/" target="_blank" class="veille-link">blog.google/products/search</a>
+      <a href="https://news.google.com/search?q=google+AI+overviews+2026" target="_blank" class="veille-link">Google News – Google AI Overviews 2026</a>
+    </div>
+    <span class="veille-tag">Moteurs de recherche</span>
+  </div>
+
+  <!-- VEILLE 5 -->
+  <div class="veille-card fade-in" style="margin-bottom:1.2rem;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+      <span style="font-family:'Space Mono',monospace;font-size:10px;color:white;background:var(--accent);padding:3px 10px;border-radius:20px;flex-shrink:0;">05</span>
+      <div class="veille-title" style="margin:0;">IA et réseaux sociaux : désinformation et automatisation</div>
+    </div>
+    <p class="veille-desc">L'IA est largement utilisée sur les réseaux sociaux pour générer du contenu et analyser les comportements utilisateurs. Sur X (Twitter), des systèmes automatisés peuvent influencer les tendances.</p>
+    <p class="veille-desc" style="margin-top:8px;">Les risques principaux sont : diffusion de fake news, manipulation de l'opinion, bots automatisés difficiles à détecter. Les plateformes développent des outils de détection de plus en plus avancés.</p>
+    <div style="margin-top:14px;display:flex;flex-direction:column;gap:6px;">
+      <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:2px;">Sources</span>
+      <a href="https://news.google.com/search?q=IA+fake+news+2026" target="_blank" class="veille-link">Google News – IA Fake News 2026</a>
+      <a href="https://twitter.com/search?q=AI" target="_blank" class="veille-link">X (Twitter) – AI</a>
+      <a href="https://arxiv.org" target="_blank" class="veille-link">arxiv.org</a>
+    </div>
+    <span class="veille-tag">Réseaux sociaux</span>
+  </div>
+
+  <!-- VEILLE 6 -->
+  <div class="veille-card fade-in" style="margin-bottom:2rem;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+      <span style="font-family:'Space Mono',monospace;font-size:10px;color:white;background:var(--accent);padding:3px 10px;border-radius:20px;flex-shrink:0;">06</span>
+      <div class="veille-title" style="margin:0;">IA en entreprise : automatisation et performance</div>
+    </div>
+    <p class="veille-desc">Les entreprises adoptent fortement l'IA pour automatiser les tâches et améliorer la performance des systèmes informatiques.</p>
+    <p class="veille-desc" style="margin-top:8px;">Les usages principaux sont : support client automatisé, analyse prédictive, supervision des infrastructures IT, optimisation des réseaux. Dans les environnements SISR, l'IA devient un outil d'aide à l'administration système et à la supervision.</p>
+    <div style="margin-top:14px;display:flex;flex-direction:column;gap:6px;">
+      <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:2px;">Sources</span>
+      <a href="https://www.economie.gouv.fr" target="_blank" class="veille-link">economie.gouv.fr</a>
+      <a href="https://news.google.com/search?q=IA+entreprise+automatisation+2026" target="_blank" class="veille-link">Google News – IA Entreprise 2026</a>
+      <a href="https://openai.com" target="_blank" class="veille-link">openai.com</a>
+    </div>
+    <span class="veille-tag">IA en entreprise</span>
+  </div>
+
+  <!-- CONCLUSION -->
+  <div style="background:linear-gradient(135deg,rgba(26,86,219,0.06),rgba(124,58,237,0.06));border:1px solid var(--border);border-radius:12px;padding:1.5rem 1.8rem;box-shadow:var(--shadow);" class="fade-in">
+    <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--accent2);text-transform:uppercase;letter-spacing:0.1em;">Conclusion</span>
+    <p style="color:var(--muted);font-size:0.9rem;margin-top:10px;line-height:1.75;">L'intelligence artificielle est une technologie en forte évolution qui impacte tous les domaines de l'informatique. Elle améliore les performances des systèmes mais introduit aussi de nouveaux risques en cybersécurité et en fiabilité de l'information.</p>
+    <div style="margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+      <span style="font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);">Veille réalisée avec :</span>
+      <span class="veille-tag" style="margin:0;">Google Alerts</span>
+      <span class="veille-tag" style="margin:0;">X (Twitter)</span>
+      <span class="veille-tag" style="margin:0;">Google News</span>
+      <span class="veille-tag" style="margin:0;">Sites officiels</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header fade-in">
+    <span class="section-num">06</span>
+    <div class="section-line"></div>
+    <h2 class="section-title">Contact</h2>
+  </div>
+  <div class="contact-wrapper fade-in">
+    <h3 class="contact-title">Travaillons <span>ensemble</span></h3>
+    <p class="contact-sub">N'hésitez pas à me contacter.</p>
+    <div class="contact-info">
+      <div class="contact-item"><span class="icon">✉</span> nassimoug2@gmail.com</div>
+      <div class="contact-item"><span class="icon">📍</span> Rouen · Normandie</div>
+      <div class="contact-item"><span class="icon">🎓</span> BTS SIO SISR – 2ᵉ année</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Nassim Ouaguenouni · BTS SIO SISR · Lycée Gustave Flaubert, Rouen</p>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  function openModal(file, title) {
+    document.getElementById('modalTitle').textContent = title;
+    document.getElementById('modalIframe').src = file;
+    document.getElementById('modalDownload').href = file;
+    const modal = document.getElementById('pdfModal');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('pdfModal').style.display = 'none';
+    document.getElementById('modalIframe').src = '';
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('pdfModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
+</body>
+</html>
